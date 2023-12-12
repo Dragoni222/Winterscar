@@ -1,0 +1,15 @@
+C:\Users\10212\RiderProjects\Winterscar\Winterscar\bin\Debug\net7.0\Winterscar.exe
+C:\Users\10212\RiderProjects\Winterscar\Winterscar\bin\Debug\net7.0\Winterscar.deps.json
+C:\Users\10212\RiderProjects\Winterscar\Winterscar\bin\Debug\net7.0\Winterscar.runtimeconfig.json
+C:\Users\10212\RiderProjects\Winterscar\Winterscar\bin\Debug\net7.0\Winterscar.dll
+C:\Users\10212\RiderProjects\Winterscar\Winterscar\bin\Debug\net7.0\Winterscar.pdb
+C:\Users\10212\RiderProjects\Winterscar\Winterscar\obj\Debug\net7.0\Winterscar.csproj.AssemblyReference.cache
+C:\Users\10212\RiderProjects\Winterscar\Winterscar\obj\Debug\net7.0\Winterscar.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\10212\RiderProjects\Winterscar\Winterscar\obj\Debug\net7.0\Winterscar.AssemblyInfoInputs.cache
+C:\Users\10212\RiderProjects\Winterscar\Winterscar\obj\Debug\net7.0\Winterscar.AssemblyInfo.cs
+C:\Users\10212\RiderProjects\Winterscar\Winterscar\obj\Debug\net7.0\Winterscar.csproj.CoreCompileInputs.cache
+C:\Users\10212\RiderProjects\Winterscar\Winterscar\obj\Debug\net7.0\Winterscar.dll
+C:\Users\10212\RiderProjects\Winterscar\Winterscar\obj\Debug\net7.0\refint\Winterscar.dll
+C:\Users\10212\RiderProjects\Winterscar\Winterscar\obj\Debug\net7.0\Winterscar.pdb
+C:\Users\10212\RiderProjects\Winterscar\Winterscar\obj\Debug\net7.0\Winterscar.genruntimeconfig.cache
+C:\Users\10212\RiderProjects\Winterscar\Winterscar\obj\Debug\net7.0\ref\Winterscar.dll
