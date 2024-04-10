@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "qi9EeDZDzDEdw59VJ8LAS7Z9M1SS7XFTZ1nqpzjXSX8EPXZf+NnVXEK32mvzqQUEIq2NursjuyYevKZ48t77CA==",
+  "dgSpecHash": "cpg8o8H0+LVyJ9t+h4CZVpFST3+ORxbni5I2wJHgTC6T/n3HRk8XmuMxdOsKS0KrAO2iObDM2s17fVu1x0iBTg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\10212\\RiderProjects\\Winterscar\\Winterscar\\Winterscar.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\joelh\\Documents\\CS\\Winterscar\\Winterscar\\Winterscar.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\joelh\\.nuget\\packages\\mathnet.numerics\\6.0.0-beta1\\mathnet.numerics.6.0.0-beta1.nupkg.sha512"
+  ],
   "logs": []
 }
