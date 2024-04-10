@@ -10,8 +10,9 @@ public class Map
     private int Height;
     private bool[] Invunerable;
     public int winner;
+    public int MaxViewSquares;
+
     public int MaxViewDistance;
-    
     //used for action lock and similar, empty is normal
     public List<int> P1NextActions = new List<int>();
     public List<int> P2NextActions = new List<int>();
@@ -25,8 +26,8 @@ public class Map
         winner = 0;
         Width = width;
         Height = height;
-        MaxViewDistance = (int)((float)maxViewDistance/2) * (2 + (maxViewDistance - 1) * 2);
-        Console.WriteLine(maxViewDistance + " " + MaxViewDistance);
+        MaxViewSquares = (int)((float)maxViewDistance/2) * (2 + (maxViewDistance - 1) * 2);
+        MaxViewDistance = maxViewDistance;
         Console.ReadLine();
         if (height < 6 || width < 3)
         {
@@ -197,12 +198,11 @@ public class Map
         }
 
         int i = 0;
-        for (int y = 1; y < viewDistance ; y++)
+        for (int y = 1; y < (viewDistance < MaxViewDistance? viewDistance: MaxViewDistance) ; y++)
         {
             for (int x = 0; x < 2 * (y) - 1; x++)
             {
                 i++;
-                Console.WriteLine(i);
                 Coordinate realArrayPos = new Coordinate(0, 0);
                 if (direction == 0)
                 {
@@ -240,7 +240,7 @@ public class Map
             }
         }
 
-        while (final.Count / 4 < MaxViewDistance)
+        while (final.Count / 4 < MaxViewSquares)
         {
             final.Add(1);
             final.Add(0);
@@ -248,7 +248,6 @@ public class Map
             final.Add(0);
         }
         
-        Console.WriteLine(final.Count);
         
         return final;
     

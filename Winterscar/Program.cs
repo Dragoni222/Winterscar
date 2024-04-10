@@ -4,7 +4,7 @@ int mapSize = 11;
 Console.WriteLine("enter seed:");
 Random random = new Random(int.Parse(Console.ReadLine()));
 Map map = new Map(mapSize, mapSize, 5);
-AI ai = new AI(new List<int>() { map.MaxViewDistance * 4, 9 }, random, 2, 1);
+AI ai = new AI(new List<int>() { map.MaxViewSquares * 4, 9 }, random, 2, 1);
 map.PlayGame(ai);
 
 

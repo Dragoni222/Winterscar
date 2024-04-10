@@ -73,7 +73,7 @@ public class AI
     public List<double> Ask(List<double> input)
     {
         Vector<double> currentState = new DenseVector(input.ToArray());
-        
+        Console.WriteLine("Vector in ASK: " + input);
         for (int layer = 0; layer < Weights.Count; layer++)
         {
             currentState = (Weights[layer] * currentState) + Biases[layer];
