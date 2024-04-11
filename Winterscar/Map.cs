@@ -9,21 +9,17 @@ public class Map
     private int Width;
     private int Height;
     private bool[] Invunerable;
-    public int winner;
     public int MaxViewSquares;
-
     public int MaxViewDistance;
     //used for action lock and similar, empty is normal
     public List<int> P1NextActions = new List<int>();
     public List<int> P2NextActions = new List<int>();
-    
     private List<int[,]> sideSwing = new List<int[,]>();
     private List<int[,]> forwardSwing = new List<int[,]>();
     private List<int[,]> lunge = new List<int[,]>();                
     
     public Map(int width, int height, int maxViewDistance)
     {
-        winner = 0;
         Width = width;
         Height = height;
         MaxViewSquares = (int)((float)maxViewDistance/2) * (2 + (maxViewDistance - 1) * 2);
@@ -119,62 +115,92 @@ public class Map
         Swords[width/2, height-3] = -1;
 
     }
-
-    public int PlayGame()
+    
+    //AI-generated deep copy method, i'm not writing all that lol
+    public Map DeepCopy()
     {
+        Map newMap = new Map(this.Width, this.Height, this.MaxViewDistance);
         
-        while (true)
+        // Copy arrays
+        Array.Copy(this.BaseLayer, newMap.BaseLayer, this.Width * this.Height);
+        Array.Copy(this.Players, newMap.Players, this.Width * this.Height);
+        Array.Copy(this.Swords, newMap.Swords, this.Width * this.Height);
+        Array.Copy(this.DamageZones, newMap.DamageZones, this.Width * this.Height);
+        Array.Copy(this.Invunerable, newMap.Invunerable, this.Width * this.Height);
+
+        // Copy lists
+        newMap.P1NextActions = new List<int>(this.P1NextActions);
+        newMap.P2NextActions = new List<int>(this.P2NextActions);
+        foreach (var array in this.sideSwing)
         {
-            Console.Clear();
-            VisionConeData(1);
-            PrintFull();
-            int p1Input = GetPlayerInput(P1NextActions);
-            Console.Clear();
-            PrintFull();
-            int p2Input = GetPlayerInput(P2NextActions);
-            Tick(p1Input, p2Input);
-            Console.WriteLine(winner);
-            if (winner == 1)
-            {
-                return 1;
-                
-            }
-            else if (winner == 2)
-            {
-                return 2;
-            }
+            var newArray = new int[array.GetLength(0), array.GetLength(1)];
+            Array.Copy(array, newArray, array.Length);
+            newMap.sideSwing.Add(newArray);
+        }
+        foreach (var array in this.forwardSwing)
+        {
+            var newArray = new int[array.GetLength(0), array.GetLength(1)];
+            Array.Copy(array, newArray, array.Length);
+            newMap.forwardSwing.Add(newArray);
+        }
+        foreach (var array in this.lunge)
+        {
+            var newArray = new int[array.GetLength(0), array.GetLength(1)];
+            Array.Copy(array, newArray, array.Length);
+            newMap.lunge.Add(newArray);
         }
 
+        return newMap;
     }
-
-    public int PlayGame(AI ai1)
+    public int PlayGame(List<AI> players, bool displayGame)
     {
-        while (true)
+        if (displayGame)
         {
             Console.Clear();
-            VisionConeData(1);
             PrintFull();
-            int p1Input = GetPlayerInput(P1NextActions);
+        }
+
+        int p1Input;
+        if (players.Count < 2)
+        {
+            p1Input = GetPlayerInput(P1NextActions);
+        }
+        else
+        {
+            p1Input = GetAIInput(P1NextActions, VisionConeData(1), players[0]);
+        }
+        
+        if (displayGame)
+        {
             Console.Clear();
             PrintFull();
-            int p2Input = GetAIInput(P2NextActions, VisionConeData(-1), ai1);
-            Tick(p1Input, p2Input);
-            Console.WriteLine(winner);
-            if (winner == 1)
-            {
-                return 1;
-                
-            }
-            else if (winner == 2)
-            {
-                return 2;
-            }
         }
+
+        int p2Input;
+        
+        if (players.Count < 1)
+        {
+            p2Input = GetPlayerInput(P2NextActions);
+        }
+        else if (players.Count < 2)
+        {
+            p2Input = GetAIInput(P2NextActions, VisionConeData(-1), players[0]);
+        }
+        else
+        {
+            p2Input = GetAIInput(P2NextActions, VisionConeData(-1), players[1]);
+        }
+        int winner = Tick(p1Input, p2Input);
+        
+        if(displayGame)
+            Console.WriteLine(winner);
+
+        return winner;
+
     }
 
     public List<int> VisionConeData(int player) //Player is -1 or 1
     {
-        PrintFull();
         Coordinate playerCoord = GetPlayerCoord(player);
         int direction = GetSwordDirection(player);
         List<int> final = new List<int>();
@@ -254,7 +280,6 @@ public class Map
         
 
     }
-    
     int GetPlayerInput(List<int> nextActions)
     {
         if (nextActions.Count > 0)
@@ -290,7 +315,6 @@ public class Map
 
         return 8;
     }
-
     int GetAIInput(List<int> nextActions, List<int> inputs, AI ai)
     {
         if (nextActions.Count > 0)
@@ -307,8 +331,9 @@ public class Map
 
 
     }
-    private void Tick(int player1Input, int player2Input)
+    public int Tick(int player1Input, int player2Input)
     {
+        int winner = 0;
         DamageZones = new int[Width, Height];
         Coordinate p1ProposedPosition = new Coordinate(0, 0);
         Coordinate p2ProposedPosition = new Coordinate(0, 0);
@@ -513,10 +538,9 @@ public class Map
             Swords[swordPosition.X, swordPosition.Y] = 0;
             Swords[p2ProposedSword.X, p2ProposedSword.Y] = -1;
         }
-        
-        
-    }
 
+        return winner;
+    }
     public void PrintFull()
     {
         Console.WriteLine();
@@ -555,7 +579,6 @@ public class Map
         Console.BackgroundColor = ConsoleColor.Black;
         Console.ForegroundColor = ConsoleColor.Gray;
     }
-
     private Coordinate GetPlayerCoord(int player)
     {
         for (int x = 0; x < Width; x++)
@@ -582,7 +605,6 @@ public class Map
 
         throw new Exception("Sword not found");
     }
-
     private Coordinate GetSwordVector(int player) // acts like a vector from the player, add this to player's pos to get sword pos
     {
         return GetSwordCoord(player) - GetPlayerCoord(player);
