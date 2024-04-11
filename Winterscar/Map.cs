@@ -24,7 +24,6 @@ public class Map
         Height = height;
         MaxViewSquares = (int)((float)maxViewDistance/2) * (2 + (maxViewDistance - 1) * 2);
         MaxViewDistance = maxViewDistance;
-        Console.ReadLine();
         if (height < 6 || width < 3)
         {
             throw new Exception("map not large enough");
@@ -126,7 +125,7 @@ public class Map
         Array.Copy(this.Players, newMap.Players, this.Width * this.Height);
         Array.Copy(this.Swords, newMap.Swords, this.Width * this.Height);
         Array.Copy(this.DamageZones, newMap.DamageZones, this.Width * this.Height);
-        Array.Copy(this.Invunerable, newMap.Invunerable, this.Width * this.Height);
+        Array.Copy(this.Invunerable, newMap.Invunerable, Invunerable.Length);
 
         // Copy lists
         newMap.P1NextActions = new List<int>(this.P1NextActions);
@@ -154,9 +153,9 @@ public class Map
     }
     public int PlayGame(List<AI> players, bool displayGame)
     {
-        if (displayGame)
+        if (displayGame && players.Count < 2)
         {
-            Console.Clear();
+            //Console.Clear();
             PrintFull();
         }
 
@@ -172,7 +171,7 @@ public class Map
         
         if (displayGame)
         {
-            Console.Clear();
+            //Console.Clear();
             PrintFull();
         }
 
@@ -284,7 +283,6 @@ public class Map
     {
         if (nextActions.Count > 0)
         {
-            Console.WriteLine(nextActions.Count);
             int nextAction = nextActions[0];
             nextActions.RemoveAt(0);
             return nextAction;
@@ -319,13 +317,18 @@ public class Map
     {
         if (nextActions.Count > 0)
         {
-            Console.WriteLine(nextActions.Count);
             int nextAction = nextActions[0];
             nextActions.RemoveAt(0);
             return nextAction;
         }
         //Legal Moves: 0,1,2,3,4,5,6,7,8
         List<double> aiAsk = ai.Ask(inputs);
+        Console.WriteLine();
+        foreach (var num in aiAsk)
+        {
+            Console.Write(" " +num);
+        }
+        Console.WriteLine();
         return aiAsk.IndexOf(aiAsk.Max());
 
 
@@ -381,7 +384,7 @@ public class Map
                     break;
                 case 5: //Swing Right
                     int direction = GetSwordDirection(player);
-                    DamageZones = GenerateDamageZone(proposedPosition, DamageZones, sideSwing[direction + direction >= 2? -2:2 ]);
+                    DamageZones = GenerateDamageZone(proposedPosition, DamageZones, sideSwing[direction + direction > 2? direction-2:direction+2]);
                     if (player == 1)
                     {
                         P1NextActions.Add(10);

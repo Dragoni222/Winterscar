@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\joelh\\Documents\\CS\\Winterscar\\Winterscar\\Winterscar.csproj": {}
+    "C:\\Users\\10212\\Desktop\\Winterscar\\Winterscar\\Winterscar.csproj": {}
   },
   "projects": {
-    "C:\\Users\\joelh\\Documents\\CS\\Winterscar\\Winterscar\\Winterscar.csproj": {
+    "C:\\Users\\10212\\Desktop\\Winterscar\\Winterscar\\Winterscar.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\joelh\\Documents\\CS\\Winterscar\\Winterscar\\Winterscar.csproj",
+        "projectUniqueName": "C:\\Users\\10212\\Desktop\\Winterscar\\Winterscar\\Winterscar.csproj",
         "projectName": "Winterscar",
-        "projectPath": "C:\\Users\\joelh\\Documents\\CS\\Winterscar\\Winterscar\\Winterscar.csproj",
-        "packagesPath": "C:\\Users\\joelh\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\joelh\\Documents\\CS\\Winterscar\\Winterscar\\obj\\",
+        "projectPath": "C:\\Users\\10212\\Desktop\\Winterscar\\Winterscar\\Winterscar.csproj",
+        "packagesPath": "C:\\Users\\10212\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\10212\\Desktop\\Winterscar\\Winterscar\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\joelh\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\10212\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -59,7 +61,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

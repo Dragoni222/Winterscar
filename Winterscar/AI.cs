@@ -77,7 +77,7 @@ public class AI
         {
             currentState = (Weights[layer] * currentState) + Biases[layer];
         }
-
+        
         return currentState.ToList();
 
     }
